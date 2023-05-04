@@ -15,7 +15,7 @@ export default function Home({navigation, route}) {
       <Text style={styles.TextStyle}>Enter Location</Text>
       <TextInput onChangeText={(n)=>setLoc(n)} style={styles.input} placeholder='Ex: Mumbai'></TextInput>
       <TouchableOpacity style={styles.button} onPress={()=>navigation.navigate("Next",{loc})} >
-        <Text>Check Weather</Text>
+        <Text style={styles.buttonStyle}>Check Weather</Text>
       </TouchableOpacity>
       <Text style={styles.bottomText}>By Kanak Desai</Text>
     </View>
@@ -67,5 +67,9 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     fontWeight: '600',
     fontSize: 10
+  },
+  buttonStyle:{
+    fontWeight: '500',
+    color: 'black'
   }
 });
