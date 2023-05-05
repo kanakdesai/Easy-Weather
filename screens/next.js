@@ -13,7 +13,7 @@ export default function Next({navigation, route}) {
   const [fl, setFl] = useState('');
 
   const [temp, setTemp] = useState('');
-  const loading = require('../Images/loadingbar.gif');
+  const loading = require('../Images/loading.png');
   const sunny = require('../Images/sun.png');
   const cloudy = require('../Images/cloud.png');
   const rain = require('../Images/rainy.png');
