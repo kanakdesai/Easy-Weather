@@ -10,9 +10,9 @@ export default function Next({navigation, route}) {
   const [errors, setErr] = useState('');
   const [text, setText] = useState('');
   const [fl, setFl] = useState('');
-  
+
   const [temp, setTemp] = useState('');
-  const loading = require('../Images/loading-bar.png')
+  const loading = require('../Images/loading-bar.png');
   const sunny = require('../Images/sun.png');
   const cloudy = require('../Images/cloud.png');
   const rain = require('../Images/rainy.png');
@@ -41,7 +41,6 @@ export default function Next({navigation, route}) {
         } else {
           setImg(sunny);
         }
-        
       })
       .catch(err => {
         console.log(err);
@@ -102,6 +101,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 10,
     backgroundColor: '#C3E0E5',
+    
   },
   TextStyle: {
     fontSize: 20,
