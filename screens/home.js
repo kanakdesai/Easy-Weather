@@ -13,7 +13,7 @@ export default function Home({navigation, route}) {
     <View style={styles.container}> 
       <Image style={styles.ImageStyle} source={require('../Images/weather.png')}></Image>
       <Text style={styles.TextStyle}>Enter Location</Text>
-      <TextInput onChangeText={(n)=>setLoc(n)} style={styles.input} placeholder='Ex: Mumbai'></TextInput>
+      <TextInput cursorColor={"#274472"} onChangeText={(n)=>setLoc(n)} style={styles.input} placeholder='Ex: Mumbai'></TextInput>
       <TouchableOpacity style={styles.button} onPress={()=>navigation.navigate("Next",{loc})} >
         <Text style={styles.buttonStyle}>Check Weather</Text>
       </TouchableOpacity>
@@ -40,15 +40,17 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   input:{
-    
+    color: 'black',
     borderWidth: 1,
-    paddingHorizontal: 30,
-    paddingVertical: 5,
+    paddingHorizontal: 20,
+    paddingVertical: 1,
     height: '8%',
-     width: '75%',
-    borderRadius: 8,
+    width: '75%',
+    borderRadius: 15,
     marginVertical: '2.5%',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    fontWeight: '500'
+    
   },
   ImageStyle: {
     width: '40%',

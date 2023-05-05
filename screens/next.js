@@ -2,6 +2,7 @@ import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import axios from 'axios';
+import { NativeBaseProvider, Box, Center, Skeleton, VStack } from "native-base";
 
 export default function Next({navigation, route}) {
   const {loc} = route.params;
@@ -12,14 +13,15 @@ export default function Next({navigation, route}) {
   const [fl, setFl] = useState('');
 
   const [temp, setTemp] = useState('');
-  const loading = require('../Images/loading-bar.png');
+  const loading = require('../Images/loadingbar.gif');
   const sunny = require('../Images/sun.png');
   const cloudy = require('../Images/cloud.png');
   const rain = require('../Images/rainy.png');
-  const sad = require('../Images/sad.png')
-  const clearSky = require('../Images/clear-sky.png')
+  const sad = require('../Images/sad.png');
+  const clearSky = require('../Images/clear-sky.png');
   const [Img, setImg] = useState(loading);
-  const[data, setData] = useState({})
+  const [data, setData] = useState({});
+  const [loaded, setLoaded] = useState(false)
   const getWeather = async () => {
     await axios({
       method: 'GET',
@@ -29,7 +31,7 @@ export default function Next({navigation, route}) {
     })
       .then(res => {
         console.log(res.data.current);
-        setData(res.data.current)
+        setData(res.data.current);
         setText(res.data.current.condition.text);
         setFl(res.data.current.feelslike_c);
         setTemp(res.data.current.temp_c);
@@ -42,12 +44,12 @@ export default function Next({navigation, route}) {
           'Heavy rain'
         ) {
           setImg(rain);
-        } else if(res.data.current.condition.text == 'Clear'){
-            setImg(clearSky);
-        } 
-        else {
+        } else if (res.data.current.condition.text == 'Clear') {
+          setImg(clearSky);
+        } else {
           setImg(sunny);
         }
+        setLoaded(true)
       })
       .catch(err => {
         console.log(err);
@@ -59,9 +61,16 @@ export default function Next({navigation, route}) {
     getWeather();
   }, []);
 
+  const Example = () => {
+    return <View style={styles.loading}>
+      <Image source={loading}></Image>
+      <Text>Loading</Text>
+    </View>
+  };
+
   return loc == '' || errors ? (
     <View style={styles.container}>
-    <Image style={styles.ImageStyle} source={sad}></Image>
+      <Image style={styles.ImageStyle} source={sad}></Image>
       <Text style={styles.Text2}>Please add a valid location</Text>
       <TouchableOpacity
         style={styles.button}
@@ -69,7 +78,7 @@ export default function Next({navigation, route}) {
         <Text>Go Back</Text>
       </TouchableOpacity>
     </View>
-  ) : (
+  ) : ( loaded==false? <Example></Example>:
     <View style={styles.container}>
       <View style={styles.card}>
         <Text style={styles.TextStyle}>{loc.toUpperCase()}</Text>
@@ -78,8 +87,10 @@ export default function Next({navigation, route}) {
         <Text style={styles.TextStyle}>Temperature: {temp}°C</Text>
         <Text style={styles.TextStyle}>Feels Like: {fl}°C</Text>
       </View>
-      <TouchableOpacity onPress={()=>navigation.navigate('Data',{data})} style={styles.button}>
-          <Text>More Info</Text>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Data', {data})}
+        style={styles.button}>
+        <Text style={{color: 'black'}}>More Info</Text>
       </TouchableOpacity>
     </View>
   );
@@ -98,7 +109,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
-    marginVertical: '5%'
+    marginVertical: '5%',
   },
   ImageStyle: {
     width: '40%',
@@ -113,18 +124,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 10,
     backgroundColor: '#C3E0E5',
-    
   },
   TextStyle: {
     fontSize: 20,
     color: 'black',
     fontWeight: '500',
     alignSelf: 'center',
+    color: 'black',
   },
-  Text2:{
+  Text2: {
     marginVertical: '2%',
-    color:'white',
-    alignSelf: 'center'
-
+    color: 'white',
+    alignSelf: 'center',
+    color: 'black',
+  },
+  loading:{
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+    zIndex: 1,
+    backgroundColor: '#C3E0E5'
   }
 });

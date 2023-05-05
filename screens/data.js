@@ -15,33 +15,33 @@ export default function Data({navigation,route}) {
       <View style={styles.card}>
             <View style={styles.innerCard}>
             <Image style={styles.ImageStyle} source={humidity}></Image>
-            <Text>Humidity</Text>
-            <Text>{data.humidity}</Text>
+            <Text style={styles.fontStyle}>Humidity</Text>
+            <Text style={styles.fontStyle}>{data.humidity}</Text>
             </View>
             <View style={styles.innerCard}>
             <Image style={styles.ImageStyle} source={dayNight}></Image>
-            <Text>Day/Night?</Text>
-            <Text>{data.is_day==1?"Day":"Night"}</Text>
+            <Text style={styles.fontStyle}>Day/Night?</Text>
+            <Text style={styles.fontStyle}>{data.is_day==1?"Day":"Night"}</Text>
             </View>
             <View style={styles.innerCard}>
             <Image style={styles.ImageStyle} source={rainfall}></Image>
-            <Text>Preciptation</Text>
-            <Text>{data.precip_mm}mm</Text>
+            <Text style={styles.fontStyle}>Preciptation</Text>
+            <Text style={styles.fontStyle}>{data.precip_mm}mm</Text>
             </View>
             <View style={styles.innerCard}>
             <Image style={styles.ImageStyle} source={uv}></Image>
-            <Text>UV rays</Text>
-            <Text>{data.uv}</Text>
+            <Text style={styles.fontStyle}>UV rays</Text>
+            <Text style={styles.fontStyle}>{data.uv}</Text>
             </View>
             <View style={styles.innerCard}>
             <Image style={styles.ImageStyle} source={windspeed}></Image>
-            <Text>Wind speed</Text>
-            <Text>{data.wind_kph}kph</Text>
+            <Text style={styles.fontStyle}>Wind speed</Text>
+            <Text style={styles.fontStyle}>{data.wind_kph}kph</Text>
             </View>
             <View style={styles.innerCard}>
             <Image style={styles.ImageStyle} source={eye}></Image>
-            <Text>Visibility</Text>
-            <Text>{data.vis_km}km</Text>
+            <Text style={styles.fontStyle}>Visibility</Text>
+            <Text style={styles.fontStyle}>{data.vis_km}km</Text>
             </View>
       </View>
     </View>
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 10,
-        backgroundColor: '#C3E0E5',
+        backgroundColor: 'lightblue',
         
         
       },
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
         // flex: 1,
         alignItems: 'center',
         justifyContent: 'space-between',
-        backgroundColor: 'pink',
+        backgroundColor: 'lightblue',
         height: '15%',
         width: '90%',
         paddingHorizontal: '10%'
@@ -83,5 +83,10 @@ const styles = StyleSheet.create({
         height: 25,
         // alignSelf: 'center',
         
+    },
+    fontStyle:{
+      color: 'black',
+      fontWeight: '600',
+      fontSize: 20
     }
 });
