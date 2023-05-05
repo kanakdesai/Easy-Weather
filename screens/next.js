@@ -16,7 +16,10 @@ export default function Next({navigation, route}) {
   const sunny = require('../Images/sun.png');
   const cloudy = require('../Images/cloud.png');
   const rain = require('../Images/rainy.png');
+  const sad = require('../Images/sad.png')
+  const clearSky = require('../Images/clear-sky.png')
   const [Img, setImg] = useState(loading);
+  const[data, setData] = useState({})
   const getWeather = async () => {
     await axios({
       method: 'GET',
@@ -26,6 +29,7 @@ export default function Next({navigation, route}) {
     })
       .then(res => {
         console.log(res.data.current);
+        setData(res.data.current)
         setText(res.data.current.condition.text);
         setFl(res.data.current.feelslike_c);
         setTemp(res.data.current.temp_c);
@@ -38,7 +42,10 @@ export default function Next({navigation, route}) {
           'Heavy rain'
         ) {
           setImg(rain);
-        } else {
+        } else if(res.data.current.condition.text == 'Clear'){
+            setImg(clearSky);
+        } 
+        else {
           setImg(sunny);
         }
       })
@@ -54,7 +61,8 @@ export default function Next({navigation, route}) {
 
   return loc == '' || errors ? (
     <View style={styles.container}>
-      <Text>Please add a valid location</Text>
+    <Image style={styles.ImageStyle} source={sad}></Image>
+      <Text style={styles.Text2}>Please add a valid location</Text>
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.goBack()}>
@@ -70,6 +78,9 @@ export default function Next({navigation, route}) {
         <Text style={styles.TextStyle}>Temperature: {temp}°C</Text>
         <Text style={styles.TextStyle}>Feels Like: {fl}°C</Text>
       </View>
+      <TouchableOpacity onPress={()=>navigation.navigate('Data',{data})} style={styles.button}>
+          <Text>More Info</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -87,6 +98,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
+    marginVertical: '5%'
   },
   ImageStyle: {
     width: '40%',
@@ -109,4 +121,10 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     alignSelf: 'center',
   },
+  Text2:{
+    marginVertical: '2%',
+    color:'white',
+    alignSelf: 'center'
+
+  }
 });

@@ -17,7 +17,7 @@ export default function Home({navigation, route}) {
       <TouchableOpacity style={styles.button} onPress={()=>navigation.navigate("Next",{loc})} >
         <Text style={styles.buttonStyle}>Check Weather</Text>
       </TouchableOpacity>
-      <Text style={styles.bottomText}>By Kanak Desai</Text>
+      <Text style={styles.bottomText}>Easy Weather</Text>
     </View>
     </TouchableWithoutFeedback>
       // </KeyboardAwareScrollView>
